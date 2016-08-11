@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "KRVideoPlayer"
-  s.version          = "1.0.1"
+  s.version          = "1.0.2"
   s.summary          = "A simple video player like weico"
   s.description      = <<-DESC
                        A video player like weico.
@@ -20,8 +20,8 @@ Pod::Spec.new do |s|
                        DESC
   s.homepage         = "https://github.com/Choujiji/KRVideoPlayer"
   s.license          = 'MIT'
-  s.author           = { "aidenluo" => "luoqi@36kr.com" }
-  s.source           = { :git => "https://github.com/Choujiji/KRVideoPlayer", :tag => s.version.to_s }
+  s.author           = { "Choujiji" => "zhaoji_choujiji@163.com" }
+  s.source           = { :git => "https://github.com/Choujiji/KRVideoPlayer", :tag => '1.0.2' }
   s.social_media_url = 'http://weibo.com/1840543654/profile'
 
   s.platform     = :ios, '6.0'
