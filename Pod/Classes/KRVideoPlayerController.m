@@ -161,6 +161,8 @@ static const CGFloat kVideoPlayerControllerAnimationTimeinterval = 0.3f;
 {
     if (self.loadState & MPMovieLoadStateStalled) {
         [self.videoControl.indicatorView startAnimating];
+    } else {
+        [self.videoControl.indicatorView stopAnimating];
     }
 }
 
