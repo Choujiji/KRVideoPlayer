@@ -96,6 +96,9 @@ static const CGFloat kVideoPlayerControllerAnimationTimeinterval = 0.3f;
         if (self.dimissCompleteBlock) {
             self.dimissCompleteBlock();
         }
+        if (self.playbackCompleteBlock) {
+            self.playbackCompleteBlock(); // 执行完成block
+        }
     }];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
 }
@@ -152,7 +155,7 @@ static const CGFloat kVideoPlayerControllerAnimationTimeinterval = 0.3f;
         self.videoControl.playButton.hidden = NO;
         [self stopDurationTimer];
         if (self.playbackState == MPMoviePlaybackStateStopped) {
-            [self.videoControl animateShow];            
+            [self.videoControl animateShow];
         }
     }
 }
@@ -202,7 +205,7 @@ static const CGFloat kVideoPlayerControllerAnimationTimeinterval = 0.3f;
 {
     [self pause];
     self.videoControl.playButton.hidden = NO;
-    self.videoControl.pauseButton.hidden = YES; 
+    self.videoControl.pauseButton.hidden = YES;
 }
 
 - (void)closeButtonClick
@@ -227,12 +230,12 @@ static const CGFloat kVideoPlayerControllerAnimationTimeinterval = 0.3f;
         keyWindow = [[[UIApplication sharedApplication] windows] firstObject];
     }
     
-    //将view的坐标系转换至window坐标系
+        //将view的坐标系转换至window坐标系
     CGRect windowFrame = [self.originSuperView convertRect:self.view.frame toView:keyWindow];
     self.view.frame = windowFrame;
     
     [keyWindow addSubview:self.view];
-
+    
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
     
     if (self.fullScreenCompleteBlock) {
@@ -271,7 +274,7 @@ static const CGFloat kVideoPlayerControllerAnimationTimeinterval = 0.3f;
         if (self.shrinkScreenCompleteBlock) {
             self.shrinkScreenCompleteBlock();
         }
-//        [self dismiss];
+            //        [self dismiss];
     }];
 }
 
