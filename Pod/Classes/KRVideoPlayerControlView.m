@@ -13,6 +13,13 @@ static const CGFloat kVideoControlAnimationTimeinterval = 0.3;
 static const CGFloat kVideoControlTimeLabelFontSize = 10.0;
 static const CGFloat kVideoControlBarAutoFadeOutTimeinterval = 5.0;
 
+#define iPhoneXSize CGSizeMake(1125, 2436)
+#define iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(iPhoneXSize, [[UIScreen mainScreen] currentMode].size) : NO)
+/** 底部安全区域高度 */
+#define SafeAreaBottomHeight ((iPhoneX) ? 34 : 0)
+/** 顶部安全区域高度 */
+#define SafeAreaTopHeight ((iPhoneX) ? 30 : 0)
+
 @interface KRVideoPlayerControlView ()
 
 @property (nonatomic, strong) UIView *topBar;
@@ -60,6 +67,19 @@ static const CGFloat kVideoControlBarAutoFadeOutTimeinterval = 5.0;
     self.topBar.frame = CGRectMake(CGRectGetMinX(self.bounds), CGRectGetMinY(self.bounds), CGRectGetWidth(self.bounds), kVideoControlBarHeight);
     self.closeButton.frame = CGRectMake(CGRectGetWidth(self.topBar.bounds) - CGRectGetWidth(self.closeButton.bounds), CGRectGetMinX(self.topBar.bounds), CGRectGetWidth(self.closeButton.bounds), CGRectGetHeight(self.closeButton.bounds));
     self.bottomBar.frame = CGRectMake(CGRectGetMinX(self.bounds), CGRectGetHeight(self.bounds) - kVideoControlBarHeight, CGRectGetWidth(self.bounds), kVideoControlBarHeight);
+    if (iPhoneX) {
+        // 位置进行修正
+        if (CGRectGetHeight(self.bounds) == (iPhoneXSize.height / 3)) {
+            // 竖屏全屏尺寸，添加底部和顶部安全区域
+            CGRect bottomBarFrame = self.bottomBar.frame;
+            bottomBarFrame.origin.y -= SafeAreaBottomHeight;
+            self.bottomBar.frame = bottomBarFrame;
+            
+            CGRect topBarFrame = self.topBar.frame;
+            topBarFrame.origin.y += SafeAreaTopHeight;
+            self.topBar.frame = topBarFrame;
+        }
+    }
     self.playButton.frame = CGRectMake(CGRectGetMinX(self.bottomBar.bounds), CGRectGetHeight(self.bottomBar.bounds)/2 - CGRectGetHeight(self.playButton.bounds)/2, CGRectGetWidth(self.playButton.bounds), CGRectGetHeight(self.playButton.bounds));
     self.pauseButton.frame = self.playButton.frame;
     self.fullScreenButton.frame = CGRectMake(CGRectGetWidth(self.bottomBar.bounds) - CGRectGetWidth(self.fullScreenButton.bounds), CGRectGetHeight(self.bottomBar.bounds)/2 - CGRectGetHeight(self.fullScreenButton.bounds)/2, CGRectGetWidth(self.fullScreenButton.bounds), CGRectGetHeight(self.fullScreenButton.bounds));
