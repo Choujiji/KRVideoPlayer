@@ -27,5 +27,8 @@
 - (void)dismiss;
 /** 设置起始播放时间 */
 - (void)setPlaybackTime:(NSTimeInterval)playbackTime;
+/** 是否显示控制视图 */
+- (void)showControlBar:(BOOL)control
+            showTopBar:(BOOL)topBar;
 
 @end

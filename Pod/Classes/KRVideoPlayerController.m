@@ -103,6 +103,14 @@ static const CGFloat kVideoPlayerControllerAnimationTimeinterval = 0.3f;
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
 }
 
+- (void)showControlBar:(BOOL)control
+            showTopBar:(BOOL)topBar {
+    self.videoControl.frame = self.view.bounds;
+    [self.videoControl setNeedsLayout];
+    self.videoControl.bottomBar.hidden = !control;
+    self.videoControl.topBar.hidden = !topBar;
+}
+
 #pragma mark - Private Method
 
 - (void)configObserver
